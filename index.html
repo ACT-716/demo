@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html LANG="ja-JP">
+<head>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>数当てゲーム</title>
+<script type="text/javascript">
+
+var wishedNumber, tryCount;
+
+function startGame()
+{
+	wishedNumber = Math.floor(Math.random() * 10);
+	tryCount = 1;
+	setTryCount();
+}
+
+function tryNumber()
+{
+	var enteredNumber = document.getElementById('number').value;
+	if (isNaN(enteredNumber))
+	{
+		alert("数値を入力してください。");
+		return;
+	}
+	if (wishedNumber == enteredNumber)
+	{
+		alert("大当たり！" + tryCount + "回目の勝利です！");
+	}
+	else if (wishedNumber > enteredNumber)
+	{
+		alert("もっと大きな数字です！");
+		tryCount++;
+	}
+	else
+	{
+		alert("もっと小さな数字です！");
+		tryCount++;
+	}
+	setTryCount();
+}
+
+function setTryCount()
+{
+	document.getElementById('tryCount').innerHTML = tryCount + "回目の挑戦！";
+}
+</script>
+</head>
+
+<body onload="startGame();">
+<h1>数当てゲーム</h1>
+<p>0 から 9 までの数字を隠しています。当ててみてください。</p>
+<p id="tryCount"></p>
+<p>予想した数字を入力！
+	<input id="number" type="text">
+	<input type="button" onclick="tryNumber();" value="挑戦！"></input>
+</p>
+<p>
+	<input type="button" onclick="startGame();" value="新しい番号を用意する"></input>
+</p>
+</body>
+</html>
