@@ -1,32 +1,58 @@
 <html>
 <head>
+<html>
+<head>
 <title>タイマー・トリプル</title>
 <script type="text/javascript">
 //<!--
-var cnt=0;
+var h1 = 0, m1 = 0, s1 = 0;
 const music = new Audio('鈴.mp3');
+function settimer(){
+    h1 = document.timerbase.timer1h.value;
+    m1 = document.timerbase.timer1m.value;
+    s1 = document.timerbase.timer1s.value;
+    timer3();
+}
+
 function timer3() {
-    cnt++;
-    document.timerbase.timertext.value=cnt;
-    setTimeout("timer3()", 500);
-    if(cnt == 10)
+    document.timerbase.timertext.value = h1 + ":" + m1 + ":" + s1;
+    if(s1==0) 
     {
-        for(var i = 0; i  5; i++){
-            music.play();
+        if(m1==0)
+        {
+            if(h1==0)
+            {
+                music.play();
+            }
+            else
+            {
+                m1=59;
+                h1--;
+            }
+        }
+        else 
+        {
+            s1=59;
+            m1--;
         }
     }
+    else s1--;
+    setTimeout("timer3()", 1000);
 }
 
 //-->
 </script>
 </head>
-<body onload="timer3()">
+<body>
 三段階のタイマーを設定する。
 
 <form name="timerbase">
+    <input type="text" name="timer1h" size=10>
+    <input type="text" name="timer1m" size=10>
+    <input type="text" name="timer1s" size=10></br></br>
+    <input type="text" name="timertext" size=10></br></br>
+    <input type=button value="開始" onClick="settimer()">
 
-    <input type="text" name="timertext" size=20>
-</form>
 
 <!--
 <input type=button value="追加" onClick="AddLog()">　
