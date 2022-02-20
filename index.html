@@ -11,7 +11,9 @@ function timer3() {
     setTimeout("timer3()", 500);
     if(cnt == 10)
     {
-        music.play();
+        for(var i = 0; i < 5; i++){
+            music.play();
+        }
     }
 }
 
